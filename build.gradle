@@ -1,0 +1,18 @@
+
+usePlugin 'java'
+usePlugin 'eclipse'
+usePlugin 'code-quality'
+
+
+dependencies {
+    compile fileTree(dir: 'libs', includes: ['*.jar'])
+}
+
+sourceCompatibility='1.6'
+version='0.9'
+manifest.mainAttributes(
+    'Implementation-Title': 'math-parser',
+    'Implementation-Version': version
+)
+
+
