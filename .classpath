@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <classpath>
-  <classpathentry kind="src" path="src/main/java"/>
-  <classpathentry kind="src" path="src/main/resources"/>
-  <classpathentry kind="output" path="build/classes/main"/>
-  <classpathentry kind="src" path="src/test/java" output="build/classes/test"/>
-  <classpathentry kind="src" path="src/test/resources" output="build/classes/test"/>
-  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="lib" path="/home/alex/Projekte/07_ewsp/MathExpr/libs/parser.jar"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/alex/Projekte/07_ewsp/MathExpr/libs/parser.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Weigl_lib"/>
+	<classpathentry kind="lib" path="/home/alex/usr/groovy/groovy-1.7.0/lib/groovy-1.7.0.jar" sourcepath="/home/alex/usr/groovy/groovy-src-1.7.0.zip"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="build/classes/"/>
 </classpath>

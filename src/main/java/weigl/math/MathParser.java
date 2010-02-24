@@ -1,5 +1,12 @@
 package weigl.math;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JTree;
+import javax.swing.tree.TreeModel;
+
+import weigl.grammar.gui.AstTokenJTreeAdapter;
 import weigl.grammar.lltck.rt.DefaultAbstractSyntaxTree;
 import weigl.grammar.lltck.rt.Token;
 import weigl.grammar.lltck.rt.TokenParserFather;
@@ -98,14 +105,18 @@ public class MathParser extends TokenParserFather<MathToken> {
 	final Node<MathToken> n = newNode(MathToken.POW);
 	boolean matched = false;
 	if (lookahead(MathToken.id, MathToken.digit, MathToken.func,
-		MathToken.constant)) {
+		MathToken.constant, MathToken.lp)) {
 	    matched = true;
 	    n.add(VALUE_());
-	    
-	    if(lookahead(MathToken.power))
-	    {
+
+	    if (lookahead(MathToken.power)) {
 		n.add(match(MathToken.power));
-		n.add(START());
+		if (lookahead(MathToken.id, MathToken.digit, MathToken.func,
+			MathToken.lp, MathToken.constant, MathToken.minus)) {
+		    n.add(VALUE());
+		} else
+		    error(MathToken.id, MathToken.digit, MathToken.func,
+			    MathToken.lp, MathToken.constant, MathToken.minus);
 	    }
 	}
 
@@ -124,15 +135,15 @@ public class MathParser extends TokenParserFather<MathToken> {
 	final Node<MathToken> n = newNode(MathToken.PUNKT);
 	boolean matched = false;
 	if (lookahead(MathToken.id, MathToken.digit, MathToken.func,
-		MathToken.constant, MathToken.minus)) {
+		MathToken.constant, MathToken.minus, MathToken.lp)) {
 	    matched = true;
 	    n.add(VALUE());
 	    n.add(PUNKT_());
 	}
 
 	if (!matched)
-	    error(MathToken.id, MathToken.digit, MathToken.func, MathToken.minus,
-		    MathToken.constant);
+	    error(MathToken.id, MathToken.digit, MathToken.func,
+		    MathToken.minus, MathToken.constant, MathToken.lp);
 	return ruleListener.PUNKT(n);
     }
 
@@ -178,14 +189,14 @@ public class MathParser extends TokenParserFather<MathToken> {
 	final Node<MathToken> n = newNode(MathToken.START);
 	boolean matched = false;
 	if (lookahead(MathToken.id, MathToken.digit, MathToken.func,
-		MathToken.constant, MathToken.minus)) {
+		MathToken.lp, MathToken.constant, MathToken.minus)) {
 	    matched = true;
 	    n.add(PUNKT());
 	    n.add(STRICH_());
 	}
 
 	if (!matched)
-	    error(MathToken.id, MathToken.digit, MathToken.func,
+	    error(MathToken.id, MathToken.digit, MathToken.func, MathToken.lp,
 		    MathToken.constant, MathToken.minus);
 	return ruleListener.START(n);
     }
@@ -228,7 +239,7 @@ public class MathParser extends TokenParserFather<MathToken> {
 	final Node<MathToken> n = newNode(MathToken.VALUE);
 	boolean matched = false;
 	if (lookahead(MathToken.id, MathToken.digit, MathToken.func,
-		MathToken.constant)) {
+		MathToken.constant, MathToken.lp)) {
 	    matched = true;
 	    n.add(POW());
 	} else if (lookahead(MathToken.minus)) {
@@ -238,8 +249,8 @@ public class MathParser extends TokenParserFather<MathToken> {
 	}
 
 	if (!matched)
-	    error(MathToken.id, MathToken.digit, MathToken.func, MathToken.minus,
-		    MathToken.constant);
+	    error(MathToken.id, MathToken.digit, MathToken.lp, MathToken.func,
+		    MathToken.minus, MathToken.constant);
 	return ruleListener.VALUE(n);
     }
 
@@ -297,6 +308,13 @@ public class MathParser extends TokenParserFather<MathToken> {
 	MathParser parser = new MathParser();
 	parser.run(br.readLine());
 	System.out.println(parser.getParseTree());
+
+	TreeModel adapter = new AstTokenJTreeAdapter(parser.getParseTree());
+	JFrame frame = new JFrame();
+	frame.setLayout(new BorderLayout());
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.add(new JTree(adapter));
+	frame.setVisible(true);
     }
 
     public static interface RuleTParserCallback {
