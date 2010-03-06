@@ -8,8 +8,8 @@ import java.awt.RenderingHints;
 
 public class CoordinateSystem {
     public static CoordinateSystem create(Graphics2D graphics, int width,
-	    int height, int dpu) {
-	return new CoordinateSystem(graphics, width, height, dpu);
+	    int height, Point center, int dpu) {
+	return new CoordinateSystem(graphics, width, height, dpu, center);
     }
 
     private int dpu;
@@ -21,12 +21,11 @@ public class CoordinateSystem {
 
     private int width;
 
-    public CoordinateSystem(Graphics2D graphic, int width, int height, int dpu) {
+    public CoordinateSystem(Graphics2D graphic, int width, int height, int dpu, Point c) {
 	this.dpu = dpu;
 	this.width = width;
 	this.height = height;
-
-	center = new Point(width / 2, height / 2);
+	center = c;
 	root = graphic;
 	init();
     }
@@ -198,7 +197,7 @@ public class CoordinateSystem {
      *            value
      * @return pixel position in horizontal
      */
-    int px(double pos) {
+    public int px(double pos) {
 	return (int) (pos * dpu) + center.x;
     }
 
@@ -208,7 +207,7 @@ public class CoordinateSystem {
      * @param pos
      * @return y-pixel position
      */
-    int py(double pos) {
+    public int py(double pos) {
 	return (int) -(pos * dpu) + center.y;
     }
 

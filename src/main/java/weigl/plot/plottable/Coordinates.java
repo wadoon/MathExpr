@@ -5,7 +5,7 @@ import java.awt.Color;
 
 import weigl.plot.CoordinateSystem;
 
-public class Coordinates extends AbstractPlottable {
+public class Coordinates extends Grid {
 
     public Coordinates() {
 	setStroke(new BasicStroke(1.8F));
@@ -21,25 +21,24 @@ public class Coordinates extends AbstractPlottable {
 
 	double length = 1 / 4D;
 	
-	for (double i = 1; i <= p.getMaxX(); i++) {
+	for (double i = getDeltaX(); i <= p.getMaxX(); i+=getDeltaX()) {
 	    p.line(i, length, i, -length);
 	    p.text(i - 0.1, -length * 2, "+" + i);
 	}
 
-	for (double i = 1; i >= p.getMinX(); i--) {
+	for (double i = getDeltaX(); i >= p.getMinX(); i-=getDeltaX()) {
 	    p.line(i, length, i, -length);
 	    p.text(i - 0.1, -length * 2, "" + i);
 	}
 
-	for (double i = 1; i <= p.getMaxY(); i++) {
+	for (double i = getDeltaY(); i <= p.getMaxY(); i+=getDeltaY()) {
 	    p.line(-length, i, length, i);
 	    p.text(-length * 3, i, "+" + i);
 	}
 
-	for (double i = 1; i >= p.getMinY(); i--) {
+	for (double i = getDeltaY(); i >= p.getMinY(); i-=getDeltaY()) {
 	    p.line(-length, i, length, i);
 	    p.text(-length * 3, i, "" + i);
 	}
     }
-
 }

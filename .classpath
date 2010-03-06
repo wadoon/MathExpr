@@ -7,7 +7,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/home/alex/Projekte/07_ewsp/MathExpr/libs/parser.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Weigl_lib"/>
-	<classpathentry kind="lib" path="/home/alex/usr/groovy/groovy-1.7.0/lib/groovy-1.7.0.jar" sourcepath="/home/alex/usr/groovy/groovy-src-1.7.0.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/home/alex/usr/jython2.5.1/jython.jar" sourcepath="/home/alex/usr/jython2.5.1/"/>
 	<classpathentry kind="output" path="build/classes/"/>
 </classpath>

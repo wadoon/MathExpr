@@ -1,5 +1,6 @@
 package weigl.plot.plottable;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
 
@@ -17,6 +18,11 @@ public abstract class AbstractPlottable implements Plottable {
 
     public AbstractPlottable setStroke(Stroke stroke) {
 	this.stroke = stroke;
+	return this;
+    }
+
+    public AbstractPlottable setStroke(float sz) {
+	this.stroke = new BasicStroke((float) sz);
 	return this;
     }
 

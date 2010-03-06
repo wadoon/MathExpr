@@ -5,6 +5,11 @@ import java.awt.Color;
 
 import weigl.plot.CoordinateSystem;
 
+/**
+ * 
+ * @author Alexander Weigl <alex953@gmail.com>
+ * @date 2010-02-23
+ */
 public class Rectangle extends AbstractPlottable {
 
     private double y1;

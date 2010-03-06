@@ -12,9 +12,8 @@ public class PictureFrame extends JFrame {
     public static final int DELTA = 10;
 
     public PictureFrame(BufferedImage ri) {
-	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	image = ri;
-
 	setSize(image.getWidth() + DELTA, image.getHeight() + DELTA);
     }
 
